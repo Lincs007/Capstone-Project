@@ -4,9 +4,9 @@ function LandingPage() {
   const handleClick = () => {};
   return (
     <div className="landing-page">
-      <h1>Welcome to MobDrip</h1>
+      <h1>Welcome to 4nez4Mzansi</h1>
       <p className="landing-descrition">
-        Mzansi's Plug for Affordable Phone Drip. Shop now to find your perfect
+        From Kasi to Cape, We've Got Your Phone!. Shop now to find your perfect
         device!
       </p>
       <Button variant="dark" className="button" onClick={handleClick}>
