@@ -203,7 +203,17 @@ const initialState = {
 const productsSlice = createSlice({
   name: "products",
   initialState,
-  reducers: {},
+  reducers: {
+    chooseColor: (state, action) => {
+      const { id, color } = action.payload;
+      const product = state.products.find((product) => product.id === id);
+      if (product) {
+        product.selectedColor = color;
+      }
+    },
+  },
 });
 
+export const selectAllProducts = (state) => state.products.products;
+export const { chooseColor, addToCart } = productsSlice.actions;
 export default productsSlice.reducer;

@@ -1,14 +1,18 @@
 import { Button } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Card, Col, Row } from "react-bootstrap";
+import { chooseColor, addToCart } from "../store/productsSlice";
 
 function LandingPage() {
   const products = useSelector((state) => state.products.products);
+  const dispatch = useDispatch();
+  const handleColorChange = (id, color) => dispatch(chooseColor({ id, color }));
+  const handleAddToCart = (id) => dispatch(addToCart({ id }));
   const handleClick = () => {};
   return (
     <div className="landing-page">
       <Row xs={1} md={2} lg={3} className="g-4">
-        {products.slice(0, 4).map((product) => (
+        {products.slice(0, 3).map((product) => (
           <Col key={product.id}>
             <Card>
               <Card.Img
@@ -23,6 +27,11 @@ function LandingPage() {
                 <Card.Title> {product.title} </Card.Title>
                 <Card.Text> {product.description} </Card.Text>
               </Card.Body>
+              <Card.Footer>
+                <Button variant="dark" onClick={handleAddToCart}>
+                  Add to Cart
+                </Button>
+              </Card.Footer>
             </Card>
           </Col>
         ))}
