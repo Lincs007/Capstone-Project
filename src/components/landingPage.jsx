@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { Card, Col, Row, Form, Collapse } from "react-bootstrap";
+import { Card, Col, Row, Form, Modal } from "react-bootstrap";
 import { chooseColor, addToCart } from "../store/productsSlice";
 
 function LandingPage() {
@@ -10,9 +10,16 @@ function LandingPage() {
   const handleColorChange = (product) =>
     dispatch(chooseColor({ id: product.id, color: product.selectedColor }));
   const handleAddToCart = (product) => dispatch(addToCart(product));
-  const [expandedProductId, setExpandedProductId] = useState(null);
-  const toggleCollapse = (productId) =>
-    setExpandedProductId((prevId) => (prevId === productId ? null : productId));
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const openModal = (product) => {
+    setSelectedProduct(product);
+    setShowModal(true);
+  };
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedProduct(null);
+  };
   const handleClick = () => {};
   return (
     <div className="landing-page">
@@ -27,7 +34,7 @@ function LandingPage() {
                   srcSet={product.srcSet}
                   sizes={product.sizes}
                   alt={product.alt}
-                  style={{ maxWidth: "100%", height: "auto" }}
+                  className="product-image"
                 />
                 <Card.Body>
                   <Card.Title className="title">{product.title}</Card.Title>
@@ -36,25 +43,26 @@ function LandingPage() {
                   </Card.Subtitle>
                   <Button
                     variant="link"
-                    onClick={() => toggleCollapse(product.id)}
-                    aria-expanded={expandedProductId === product.id}
-                    aria-controls={`collapse-${product.id}`}
+                    onClick={() => openModal(product)}
+                    aria-label={`View details for ${product.title}`}
                     className="ms-2 p-0"
                     style={{ textDecoration: "none" }}
                   >
-                    <i
-                      className={`bi bi-info-circle ${
-                        expandedProductId === product.id
-                          ? "primary-text"
-                          : "secondary-text"
-                      }`}
-                    ></i>
+                    <i className="bi bi-info-circle text-secondary"></i>
                   </Button>
-                  <Collapse in={expandedProductId === product.id}>
-                    <div id={`collapse-${product.id}`} className="mt-3">
-                      <Card.Text>{product.description}</Card.Text>
-                    </div>
-                  </Collapse>
+                  <Modal show={showModal} onHide={closeModal} centered>
+                    <Modal.Header closeButton>
+                      <Modal.Title>{selectedProduct?.title}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className="product-description">
+                      {selectedProduct?.description}
+                    </Modal.Body>
+                    <Modal.Footer>
+                      <Button variant="secondary" onClick={closeModal}>
+                        Close
+                      </Button>
+                    </Modal.Footer>
+                  </Modal>
                 </Card.Body>
                 <Card.Footer>
                   <label className="form-label">Choose Color</label>
@@ -84,7 +92,7 @@ function LandingPage() {
           </>
         ))}
       </Row>
-      <h1>Welcome to 4nez4Mzansi</h1>
+      <h1 className="welcome">Welcome to 4nez4Mzansi</h1>
       <p className="landing-descrition">
         From Kasi to Cape, We've Got Your Phone!. Shop now to find your perfect
         device!
