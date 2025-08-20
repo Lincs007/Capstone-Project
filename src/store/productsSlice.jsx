@@ -214,6 +214,6 @@ const productsSlice = createSlice({
   },
 });
 
-export const selectAllProducts = (state) => state.products.products;
+//export const selectAllProducts = (state) => state.products.products;
 export const { chooseColor, addToCart } = productsSlice.actions;
 export default productsSlice.reducer;
