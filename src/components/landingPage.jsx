@@ -10,8 +10,9 @@ function LandingPage() {
   const handleColorChange = (product) =>
     dispatch(chooseColor({ id: product.id, color: product.selectedColor }));
   const handleAddToCart = (product) => dispatch(addToCart(product));
-  const [isExpanded, setIsExpanded] = useState(false);
-  const toggleCollapse = () => setIsExpanded(!isExpanded);
+  const [expandedProductId, setExpandedProductId] = useState(null);
+  const toggleCollapse = (productId) =>
+    setExpandedProductId((prevId) => (prevId === productId ? null : productId));
   const handleClick = () => {};
   return (
     <div className="landing-page">
@@ -35,19 +36,21 @@ function LandingPage() {
                   </Card.Subtitle>
                   <Button
                     variant="link"
-                    onClick={toggleCollapse}
-                    aria-expanded={isExpanded}
+                    onClick={() => toggleCollapse(product.id)}
+                    aria-expanded={expandedProductId === product.id}
                     aria-controls={`collapse-${product.id}`}
                     className="ms-2 p-0"
                     style={{ textDecoration: "none" }}
                   >
                     <i
                       className={`bi bi-info-circle ${
-                        isExpanded ? "primary-text" : "secondary-text"
+                        expandedProductId === product.id
+                          ? "primary-text"
+                          : "secondary-text"
                       }`}
                     ></i>
                   </Button>
-                  <Collapse in={isExpanded}>
+                  <Collapse in={expandedProductId === product.id}>
                     <div id={`collapse-${product.id}`} className="mt-3">
                       <Card.Text>{product.description}</Card.Text>
                     </div>
