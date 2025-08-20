@@ -15,60 +15,70 @@ function LandingPage() {
   const handleClick = () => {};
   return (
     <div className="landing-page">
-      <Row xs={1} md={2} lg={4} className="g-4">
-        {products.slice(0, 4).map((product) => (
-          <Col key={product.id}>
-            <Card>
-              <Card.Img
-                variant="top"
-                src={product.src}
-                srcSet={product.srcSet}
-                sizes={product.sizes}
-                alt={product.alt}
-                style={{ maxWidth: "100%", height: "auto" }}
-              />
-              <Card.Body>
-                <Card.Title className="title">{product.title}</Card.Title>
-                <Card.Subtitle className="price">{product.price}</Card.Subtitle>
-                <Button
-                  variant="outline-dark"
-                  onClick={toggleCollapse}
-                  aria-expanded={isExpanded}
-                  aria-controls={`collapse-${product.id}`}
-                >
-                  {isExpanded ? "Less" : "More"}
-                </Button>
-                <Collapse in={isExpanded}>
-                  <div id={`collapse-${product.id}`} className="mt-3">
-                    <Card.Text>{product.description}</Card.Text>
-                  </div>
-                </Collapse>
-              </Card.Body>
-              <Card.Footer>
-                <label className="form-label">Choose Color</label>
-                <Form.Select
-                  aria-label="select color"
-                  className="select-color"
-                  value={product.selectedColor}
-                  onChange={(e) =>
-                    handleColorChange({
-                      ...product,
-                      selectedColor: e.target.value,
-                    })
-                  }
-                >
-                  {product.color.map((color) => (
-                    <option key={color} value={color}>
-                      {color}
-                    </option>
-                  ))}
-                </Form.Select>
-                <Button variant="dark" onClick={handleAddToCart}>
-                  Add to Cart
-                </Button>
-              </Card.Footer>
-            </Card>
-          </Col>
+      <Row xs={1} md={2} lg={5} className="g-4">
+        {products.slice(0, 5).map((product) => (
+          <>
+            <Col key={product.id}>
+              <Card>
+                <Card.Img
+                  variant="top"
+                  src={product.src}
+                  srcSet={product.srcSet}
+                  sizes={product.sizes}
+                  alt={product.alt}
+                  style={{ maxWidth: "100%", height: "auto" }}
+                />
+                <Card.Body>
+                  <Card.Title className="title">{product.title}</Card.Title>
+                  <Card.Subtitle className="price">
+                    {product.price}
+                  </Card.Subtitle>
+                  <Button
+                    variant="link"
+                    onClick={toggleCollapse}
+                    aria-expanded={isExpanded}
+                    aria-controls={`collapse-${product.id}`}
+                    className="ms-2 p-0"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <i
+                      className={`bi bi-info-circle ${
+                        isExpanded ? "primary-text" : "secondary-text"
+                      }`}
+                    ></i>
+                  </Button>
+                  <Collapse in={isExpanded}>
+                    <div id={`collapse-${product.id}`} className="mt-3">
+                      <Card.Text>{product.description}</Card.Text>
+                    </div>
+                  </Collapse>
+                </Card.Body>
+                <Card.Footer>
+                  <label className="form-label">Choose Color</label>
+                  <Form.Select
+                    aria-label="select color"
+                    className="select-color"
+                    value={product.selectedColor}
+                    onChange={(e) =>
+                      handleColorChange({
+                        ...product,
+                        selectedColor: e.target.value,
+                      })
+                    }
+                  >
+                    {product.color.map((color) => (
+                      <option key={color} value={color}>
+                        {color}
+                      </option>
+                    ))}
+                  </Form.Select>
+                  <Button variant="dark" onClick={handleAddToCart}>
+                    Add to Cart
+                  </Button>
+                </Card.Footer>
+              </Card>
+            </Col>
+          </>
         ))}
       </Row>
       <h1>Welcome to 4nez4Mzansi</h1>
