@@ -78,7 +78,11 @@ function LandingPage() {
                     }
                   >
                     {product.color.map((color) => (
-                      <option key={color} value={color}>
+                      <option
+                        key={color}
+                        value={color}
+                        className="color-option"
+                      >
                         {color}
                       </option>
                     ))}
