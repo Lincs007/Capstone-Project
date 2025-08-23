@@ -1,8 +1,12 @@
 import { useFormik } from "formik";
 import { Button, Container, Form } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 const validate = (values) => {
   const errors = {};
+  const savedUser = useSelector((state) => state.userDetails);
+  const savedUserName = savedUser.map((user) => user.userName);
+  const savedEmail = savedUser.map((user) => user.email);
   if (!values.firstName) {
     errors.firstName = "First name is required";
   } else if (values.firstName.length > 15) {
@@ -30,12 +34,17 @@ const validate = (values) => {
     errors.userName = "username must be between 5 and 50 characters long";
   } else if (!userNameRegex.test(values.userName)) {
     errors.userName = "invalid username format";
+  } else if (savedUserName.some((userName) => userName === values.userName)) {
+    errors.userName = "Username already exists, please choose another one";
   }
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   if (!values.email) {
     errors.email = "Email is requires";
   } else if (!emailRegex.test(values.email)) {
     errors.email = "Invalid email address format";
+  } else if (savedEmail.some((email) => email === values.email)) {
+    errors.email =
+      "Email already exists, please sign instead or choose another one";
   }
   const passwordRegex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;

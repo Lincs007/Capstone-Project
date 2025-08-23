@@ -1,42 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  userDetails: {
-    firstName: "",
-    surname: "",
-    userName: "",
-    email: "",
-    password: "",
-  },
+  userDetails: [],
 };
 
 const userDetailsSlice = createSlice({
   name: "userDetails",
   initialState,
   reducers: {
-    saveFirstName: (state, action) => {
-      state.userDetails.firstName = action.payload;
-    },
-    saveSurname: (state, action) => {
-      state.userDetails.surname = action.payload;
-    },
-    saveUsername: (state, action) => {
-      state.userDetails.userName = action.payload;
-    },
-    saveEmail: (state, action) => {
-      state.userDetails.email = action.payload;
-    },
-    savePassword: (state, action) => {
-      state.userDetails.password = action.payload;
+    saveUserDetails: (state, action) => {
+      userData = action.payload;
+      state.userDetails.push({ ...userData, id: state.userDetails.length + 1 });
     },
   },
 });
 
-export const {
-  saveFirstName,
-  saveSurname,
-  saveUsername,
-  saveEmail,
-  savePassword,
-} = userDetailsSlice.actions;
+export const { saveUserDetails } = userDetailsSlice.actions;
 export default userDetailsSlice.reducer;
