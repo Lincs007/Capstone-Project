@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import { Button, Container, Form } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { saveUserDetails } from "../store/userDetailsSlice";
 
 const validate = (values) => {
   const errors = {};
@@ -39,7 +40,7 @@ const validate = (values) => {
   }
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   if (!values.email) {
-    errors.email = "Email is requires";
+    errors.email = "Email is required";
   } else if (!emailRegex.test(values.email)) {
     errors.email = "Invalid email address format";
   } else if (savedEmail.some((email) => email === values.email)) {
@@ -50,14 +51,15 @@ const validate = (values) => {
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   if (!values.password) {
     errors.password = "Password is required";
-  } else if (passwordRegex.test(values.password)) {
+  } else if (!passwordRegex.test(values.password)) {
     errors.password =
-      "Password must coontain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character";
+      "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character";
   }
   return errors;
 };
 
 function SignupPage() {
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -67,8 +69,10 @@ function SignupPage() {
       password: "",
     },
     validate,
-    onSubmit: (values) =>
-      console.log("Your signup data has been submitted.", values),
+    onSubmit: (values) => {
+      dispatch(saveUserDetails(values));
+      console.log("Your signup form data has been submitted.", values);
+    },
   });
 
   return (
