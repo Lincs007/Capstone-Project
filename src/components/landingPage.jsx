@@ -2,7 +2,8 @@ import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { Card, Col, Row, Form, Modal } from "react-bootstrap";
-import { chooseColor, addToCart } from "../store/productsSlice";
+import { chooseColor } from "../store/productsSlice";
+import { addToCart } from "../store/shoppingCartSlice";
 
 function LandingPage() {
   const products = useSelector((state) => state.products.products);

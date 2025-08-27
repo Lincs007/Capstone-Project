@@ -19,7 +19,29 @@ const shoppingCartSlice = createSlice({
         state.shoppingCart.push({ ...product, quantity: 1 });
       }
     },
+    decreaseQuantity: (state, action) => {
+      const productId = action.payload;
+      const existingProduct = state.shoppingCart.find(
+        (product) => product.id === productId
+      );
+      if (existingProduct) {
+        if (existingProduct.quantity > 1) {
+          existingProduct.quantity -= 1;
+        } else {
+          return state.shoppingCart.filter(
+            (product) => product.id !== productId
+          );
+        }
+      }
+    },
+    removeFromCart: (state, action) => {
+      const productId = action.payload;
+      state.shoppingCart = state.shoppingCart.filter(
+        (product) => product.id !== productId
+      );
+    },
   },
 });
-
+export const { addToCart, removeFromCart, decreaseQuantity } =
+  shoppingCartSlice.actions;
 export default shoppingCartSlice.reducer;
