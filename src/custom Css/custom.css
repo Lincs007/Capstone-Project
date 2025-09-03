@@ -12,24 +12,50 @@
   box-shadow: none;
   color: white;
 }
-.product-image {
-  max-width: 100%;
-  height: 100%;
-}
+
 .form-label {
   margin-top: 10px;
   color: black;
 }
 .select-color {
+  font-size: 0.9rem;
   margin-bottom: 10px;
   color: #333;
 }
 .landing-page {
-  width: 90%;
+  min-height: 100vh;
 }
 .product-card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+}
+.product-image {
+  object-fit: cover;
+  width: 100%;
+  height: 200px;
+}
+.image-wrapper {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.welcome {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+.landing-description {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+.button {
+  border-radius: 25px;
+  padding: 10px 25px;
+}
+.information-button-wrapper {
+  display: flex;
 }

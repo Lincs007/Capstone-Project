@@ -3,14 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { Card, Col, Row, Form, Modal } from "react-bootstrap";
 import { chooseColor } from "../store/productsSlice";
-import { addToCart } from "../store/shoppingCartSlice";
+import { incrementQuantity } from "../store/shoppingCartSlice";
 
 function LandingPage() {
   const products = useSelector((state) => state.products.products);
   const dispatch = useDispatch();
   const handleColorChange = (product) =>
     dispatch(chooseColor({ id: product.id, color: product.selectedColor }));
-  const handleAddToCart = (product) => dispatch(addToCart(product));
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const openModal = (product) => {
@@ -23,34 +22,36 @@ function LandingPage() {
   };
   const handleClick = () => {};
   return (
-    <div className="landing-page">
-      <Row xs={1} md={2} lg={5} className="g-4">
+    <div className="landing-page container py-5">
+      <Row xs={1} sm={2} md={3} lg={5} className="g-4">
         {products.slice(0, 5).map((product) => (
           <>
             <Col key={product.id}>
-              <Card>
-                <Card.Img
-                  variant="top"
-                  src={product.src}
-                  srcSet={product.srcSet}
-                  sizes={product.sizes}
-                  alt={product.alt}
-                  className="product-image"
-                />
-                <Card.Body>
+              <Card className="h-100 shadow-sm">
+                <div className="image-wrapper">
+                  <Card.Img
+                    variant="top"
+                    src={product.src}
+                    alt={product.alt}
+                    className="product-image"
+                  />
+                </div>
+                <Card.Body className="d-flex flex-column">
                   <Card.Title className="title">{product.title}</Card.Title>
-                  <Card.Subtitle className="price">
+                  <Card.Subtitle className="price text-muted mb-2">
                     {product.price}
                   </Card.Subtitle>
-                  <Button
-                    variant="link"
-                    onClick={() => openModal(product)}
-                    aria-label={`View details for ${product.title}`}
-                    className="ms-2 p-0"
-                    style={{ textDecoration: "none" }}
-                  >
-                    <i className="bi bi-info-circle text-secondary"></i>
-                  </Button>
+                  <div className="mt-auto">
+                    <Button
+                      variant="link"
+                      onClick={() => openModal(product)}
+                      aria-label={`View details for ${product.title}`}
+                      className="ms-0 p-0"
+                      style={{ textDecoration: "none" }}
+                    >
+                      <i className="bi bi-info-circle text-secondary"></i>
+                    </Button>
+                  </div>
                   <Modal show={showModal} onHide={closeModal} centered>
                     <Modal.Header closeButton>
                       <Modal.Title>{selectedProduct?.title}</Modal.Title>
@@ -65,8 +66,7 @@ function LandingPage() {
                     </Modal.Footer>
                   </Modal>
                 </Card.Body>
-                <Card.Footer>
-                  <label className="form-label">Choose Color</label>
+                <Card.Footer className="d-flex flex-column gap-2">
                   <Form.Select
                     aria-label="select color"
                     className="select-color"
@@ -88,7 +88,10 @@ function LandingPage() {
                       </option>
                     ))}
                   </Form.Select>
-                  <Button variant="dark" onClick={handleAddToCart}>
+                  <Button
+                    variant="dark"
+                    onClick={() => dispatch(incrementQuantity(product))}
+                  >
                     Add to Cart
                   </Button>
                 </Card.Footer>
@@ -97,14 +100,21 @@ function LandingPage() {
           </>
         ))}
       </Row>
-      <h1 className="welcome">Welcome to 4nez4Mzansi</h1>
-      <p className="landing-descrition">
-        From Kasi to Cape, We've Got Your Phone!. Shop now to find your perfect
-        device!
-      </p>
-      <Button variant="dark" className="button" onClick={handleClick}>
-        Browse Phones
-      </Button>
+      <div className="text-center mb-5">
+        <h1 className="welcome fw-bold">Welcome to 4nez4Mzansi</h1>
+        <p className="landing-description text-muted">
+          From Kasi to Cape, We've Got Your Phone!. Shop now to find your
+          perfect device!
+        </p>
+        <Button
+          variant="dark"
+          size="lg"
+          className="button"
+          onClick={handleClick}
+        >
+          Browse Phones
+        </Button>
+      </div>
     </div>
   );
 }

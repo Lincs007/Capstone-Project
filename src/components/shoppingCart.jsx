@@ -2,8 +2,8 @@ import { Container, Card, Row, Col, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import {
   removeFromCart,
-  addToCart,
-  decreaseQuantity,
+  incrementQuantity,
+  decrementQuantity,
 } from "../store/shoppingCartSlice";
 
 function ShoppingCart() {
@@ -35,7 +35,7 @@ function ShoppingCart() {
             );
             const subtotal = productPrice * Number(product.quantity);
             return (
-              <Card key={product.id} className="mb-3 shadow=sm">
+              <Card key={product.id} className=" h-100 shadow-sm">
                 <Row className="g-0 align-items-center">
                   <Col md={3}>
                     <Card.Img
@@ -63,7 +63,7 @@ function ShoppingCart() {
                         variant="outline-secondary"
                         size="sm"
                         className="remove-button"
-                        onClick={() => dispatch(decreaseQuantity(product.id))}
+                        onClick={() => dispatch(decrementQuantity(product.id))}
                       >
                         -
                       </Button>
@@ -71,7 +71,7 @@ function ShoppingCart() {
                       <Button
                         variant="outline-secondary"
                         size="sm"
-                        onClick={() => dispatch(addToCart(product))}
+                        onClick={() => dispatch(incrementQuantity(product))}
                       >
                         +
                       </Button>

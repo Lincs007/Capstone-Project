@@ -8,7 +8,7 @@ const shoppingCartSlice = createSlice({
   name: "shoppingCart",
   initialState,
   reducers: {
-    addToCart: (state, action) => {
+    incrementQuantity: (state, action) => {
       const product = action.payload;
       const existingProduct = state.shoppingCart.find(
         (item) => item.id === product.id
@@ -19,7 +19,7 @@ const shoppingCartSlice = createSlice({
         state.shoppingCart.push({ ...product, quantity: 1 });
       }
     },
-    decreaseQuantity: (state, action) => {
+    decrementQuantity: (state, action) => {
       const productId = action.payload;
       const existingProduct = state.shoppingCart.find(
         (product) => product.id === productId
@@ -42,6 +42,6 @@ const shoppingCartSlice = createSlice({
     },
   },
 });
-export const { addToCart, removeFromCart, decreaseQuantity } =
+export const { incrementQuantity, removeFromCart, decrementQuantity } =
   shoppingCartSlice.actions;
 export default shoppingCartSlice.reducer;
