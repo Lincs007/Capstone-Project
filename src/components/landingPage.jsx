@@ -22,7 +22,7 @@ function LandingPage() {
   };
   const handleClick = () => {};
   return (
-    <div className="landing-page container py-5">
+    <div className="main container py-5">
       <Row xs={1} sm={2} md={3} lg={5} className="g-4">
         {products.slice(0, 5).map((product) => (
           <>

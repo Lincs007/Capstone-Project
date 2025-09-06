@@ -1,11 +1,12 @@
-import LandingPage from "./components/landingPage";
+//import LandingPage from "./components/landingPage";
+import ProductPage from "./components/productsPage";
 import "./App.css";
-import "./custom Css/custom.css";
+import "./customCss/landingPage.css";
 
 function App() {
   return (
     <>
-      <LandingPage />
+      <ProductPage />
     </>
   );
 }
