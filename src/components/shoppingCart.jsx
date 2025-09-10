@@ -16,7 +16,7 @@ import {
 } from "../store/shoppingCartSlice";
 
 function ShoppingCart() {
-  const cartProducts = useSelector((state) => state.shoppingCart);
+  const cartProducts = useSelector((state) => state.shoppingCart.shoppingCart);
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const openModal = () => setShowModal(true);
@@ -33,7 +33,7 @@ function ShoppingCart() {
       style: "currency",
       currency: "ZAR",
     }).format(value);
-  console.log(formatCurrency(value));
+  console.log(formatCurrency(totalPrice));
   return (
     <Container className="shoppingCart-container">
       <h2>Shopping Cart</h2>
@@ -124,7 +124,7 @@ function ShoppingCart() {
                   aria-label="view shipping options info"
                   style={{ textDecoration: "none" }}
                 >
-                  <i className="bi bi-info-circle text-secondary"></i>"
+                  <i className="bi bi-info-circle text-secondary"></i>
                 </Button>
               </Col>
             </Row>
