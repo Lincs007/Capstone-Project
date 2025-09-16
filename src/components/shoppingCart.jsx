@@ -49,7 +49,7 @@ function ShoppingCart() {
             return (
               <Card key={product.id} className=" h-100 shadow-sm">
                 <Row className="g-0 align-items-center">
-                  <Col md={3}>
+                  <Col md={2}>
                     <Card.Img
                       src={product.src}
                       srcSet={product.srcSet}
@@ -59,7 +59,7 @@ function ShoppingCart() {
                     />
                   </Col>
 
-                  <Col md={6}>
+                  <Col md={4}>
                     <Card.Body>
                       <Card.Title>{product.title}</Card.Title>
                       <Card.Text>
@@ -69,7 +69,7 @@ function ShoppingCart() {
                       </Card.Text>
                     </Card.Body>
                   </Col>
-                  <Col md={3} className="text-end p-3">
+                  <Col md={1} className="text-end p-3">
                     <div className="d-flex justify-content-end align-items-center gap-2">
                       <Button
                         variant="outline-secondary"
@@ -101,7 +101,7 @@ function ShoppingCart() {
             );
           })}
           <hr />
-          <h3> Total:{formatCurrency(totalPrice)} </h3>
+          <h3> Total amount :{formatCurrency(totalPrice)} </h3>
           <div className="text-end mt-3">
             <Row>
               <Col>
