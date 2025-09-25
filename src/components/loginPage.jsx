@@ -1,9 +1,11 @@
 import { useFormik } from "formik";
 import { Button, Container, Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
-  const savedUser = useSelector((state) => state.userDetails);
+  const savedUser = useSelector((state) => state.userDetails.userDetails);
+  const navigate = useNavigate();
   console.log("saved user details from redux store:", savedUser);
   const validate = (values) => {
     const errors = {};
@@ -29,12 +31,20 @@ function LoginPage() {
   };
   const formik = useFormik({
     initialValues: {
-      email: "",
+      userName: "",
       password: "",
     },
     validate,
     onSubmit: (values) => {
-      console.log("Login form data has been submitted", values);
+      const matchedUser = savedUser.find(
+        (user) => user.userName === values.userName
+      );
+      if (matchedUser && matchedUser.password === values.password) {
+        console.log("Login successful", values);
+        navigate("/");
+      } else {
+        console.log("Login failed", values);
+      }
     },
   });
   return (

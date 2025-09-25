@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { saveUserDetails } from "../store/userDetailsSlice";
 
 function SignupPage() {
-  const savedUser = useSelector((state) => state.userDetails);
+  const savedUser = useSelector((state) => state.userDetails.userDetails);
   const dispatch = useDispatch();
   const validate = (values) => {
     const errors = {};
@@ -27,7 +27,7 @@ function SignupPage() {
     const userNameRegex = /^(?!.*\.\.)[a-zA-Z][a-zA-Z0-9.]{4,49}$/;
     if (!values.userName) {
       errors.userName = "Username is required";
-    } else if (!/^[A-Za-z]$/.test(values.userName)) {
+    } else if (!/^[A-Za-z]+$/.test(values.userName)) {
       errors.userName = "username must start with a letter";
     } else if (/\.{2,}/.test(values.userName)) {
       errors.userName = "username cannot contain consecutive periods";

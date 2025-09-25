@@ -9,7 +9,7 @@ const userDetailsSlice = createSlice({
   initialState,
   reducers: {
     saveUserDetails: (state, action) => {
-      userData = action.payload;
+      const userData = action.payload;
       state.userDetails.push({ ...userData, id: state.userDetails.length + 1 });
     },
   },
