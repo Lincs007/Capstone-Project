@@ -8,14 +8,25 @@ import "./App.css";
 import "./customCss/landingPage.css";
 import "./customCss/form.css";
 import { Routes, Route } from "react-router-dom";
+import { useState } from "react";
 
 function App() {
+  const [showModal, setShowModal] = useState(false);
+  const openModal = () => setShowModal(true);
+  const closeModal = () => setShowModal(false);
   return (
     <>
-      <Header />
+      <Header openModal={openModal} />
+      {showModal && (
+        <LoginPage
+          openModal={openModal}
+          closeModal={closeModal}
+          showModal={showModal}
+        />
+      )}
       <Routes>
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="/login" element={<LoginPage />} />
+
         <Route exact path="/" element={<LandingPage />} />
         <Route path="/products" element={<ProductPage />} />
         <Route path="/cart" element={<ShoppingCart />} />

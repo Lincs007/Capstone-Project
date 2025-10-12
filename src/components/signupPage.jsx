@@ -2,14 +2,17 @@ import { useFormik } from "formik";
 import { Button, Container, Form } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { saveUserDetails } from "../store/userDetailsSlice";
+import { useNavigate } from "react-router-dom";
 
 function SignupPage() {
   const savedUser = useSelector((state) => state.userDetails.userDetails);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  console.log("saved user details from redux store:", savedUser);
+  const savedUserName = savedUser.map((user) => user.userName);
+  const savedEmail = savedUser.map((user) => user.email);
   const validate = (values) => {
     const errors = {};
-    const savedUserName = savedUser.map((user) => user.userName);
-    const savedEmail = savedUser.map((user) => user.email);
     if (!values.firstName) {
       errors.firstName = "First name is required";
     } else if (values.firstName.length > 15) {
@@ -72,7 +75,15 @@ function SignupPage() {
     validate,
     onSubmit: (values) => {
       dispatch(saveUserDetails(values));
-      console.log("Your signup form data has been submitted.", values);
+      const userNameTest = savedUserName.some(
+        (userName) => userName === values.userName
+      );
+      if (!userNameTest && savedEmail.some((email) => email === values.email)) {
+        console.log("Signup successful", values);
+        navigate("/login");
+      } else {
+        console.log("Signup failed", values);
+      }
     },
   });
 

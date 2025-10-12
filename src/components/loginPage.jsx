@@ -1,9 +1,9 @@
 import { useFormik } from "formik";
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Container, Form, Modal } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-function LoginPage() {
+function LoginPage(props) {
   const savedUser = useSelector((state) => state.userDetails.userDetails);
   const navigate = useNavigate();
   console.log("saved user details from redux store:", savedUser);
@@ -48,41 +48,46 @@ function LoginPage() {
     },
   });
   return (
-    <Container className="form-container py-5">
-      <Form onSubmit={formik.handleSubmit}>
-        <Form.Group className="mb-3" controlId="userName">
-          <Form.Control
-            name="userName"
-            type="text"
-            placeholder="enter your username"
-            onChange={formik.handleChange}
-            value={formik.values.userName}
-            onBlur={formik.handleBlur}
-          />
-          {formik.touched.userName && formik.errors.userName ? (
-            <div className="error-message">{formik.errors.userName}</div>
-          ) : null}
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="password">
-          <Form.Control
-            name="password"
-            type="password"
-            placeholder="enter your password"
-            onChange={formik.handleChange}
-            value={formik.values.password}
-            onBlur={formik.handleBlur}
-          />
-          {formik.touched.password && formik.errors.password ? (
-            <div className="error-message">{formik.errors.password}</div>
-          ) : null}
-        </Form.Group>
-        <div className="d-flex flex-column align-items-center">
-          <Button variant="dark" type="submit">
-            Login
-          </Button>
-        </div>
-      </Form>
-    </Container>
+    <Modal show={props.showModal} onHide={props.closeModal} centered>
+      <Modal.Header closeButton>
+        <Modal.Title>Login</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form onSubmit={formik.handleSubmit}>
+          <Form.Group className="mb-3" controlId="userName">
+            <Form.Control
+              name="userName"
+              type="text"
+              placeholder="enter your username"
+              onChange={formik.handleChange}
+              value={formik.values.userName}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.userName && formik.errors.userName ? (
+              <div className="error-message">{formik.errors.userName}</div>
+            ) : null}
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="password">
+            <Form.Control
+              name="password"
+              type="password"
+              placeholder="enter your password"
+              onChange={formik.handleChange}
+              value={formik.values.password}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.password && formik.errors.password ? (
+              <div className="error-message">{formik.errors.password}</div>
+            ) : null}
+          </Form.Group>
+          <div className="d-flex flex-column align-items-center">
+            <Button variant="dark" type="submit">
+              Login
+            </Button>
+          </div>
+        </Form>
+      </Modal.Body>
+    </Modal>
   );
 }
 

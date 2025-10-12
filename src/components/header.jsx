@@ -7,7 +7,7 @@ import SignupPage from "./signupPage";
 import { Navbar, Nav, Container, Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-function Header() {
+function Header(props) {
   const cartProducts = useSelector((state) => state.shoppingCart.shoppingCart);
   const cartQuantity = cartProducts.map((product) => product.quantity);
   const cartTotalItems = cartQuantity.reduce((total, qty) => total + qty, 0);
@@ -29,9 +29,7 @@ function Header() {
             <Nav.Link as={Link} to={"/products"}>
               Products
             </Nav.Link>
-            <Nav.Link as={Link} to={"/login"}>
-              Login
-            </Nav.Link>
+            <Nav.Link onClick={props.openModal}>Login</Nav.Link>
             <Nav.Link as={Link} to={"/signup"}>
               Signup
             </Nav.Link>
