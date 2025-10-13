@@ -1,10 +1,10 @@
 import { useFormik } from "formik";
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Container, Form, Modal } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { saveUserDetails } from "../store/userDetailsSlice";
 import { useNavigate } from "react-router-dom";
 
-function SignupPage() {
+function SignupPage(props) {
   const savedUser = useSelector((state) => state.userDetails.userDetails);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -88,80 +88,85 @@ function SignupPage() {
   });
 
   return (
-    <Container className="form-container">
-      <h1>Welcome to 4nez4Mzansi</h1>
-      <Form onSubmit={formik.handleSubmit}>
-        <Form.Group className="mb-3" controlId="firstName">
-          <Form.Control
-            name="firstName"
-            type="text"
-            placeholder="first Name"
-            onChange={formik.handleChange}
-            value={formik.values.firstName}
-            onBlur={formik.handleBlur}
-          />
-          {formik.touched.firstName && formik.errors.firstName ? (
-            <div className="error-message">{formik.errors.firstName}</div>
-          ) : null}
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="surname">
-          <Form.Control
-            name="surname"
-            type="text"
-            placeholder="surname"
-            onChange={formik.handleChange}
-            value={formik.values.surname}
-          />
-          {formik.touched.surname && formik.errors.surname ? (
-            <div className="error-message">{formik.errors.surname}</div>
-          ) : null}
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="userName">
-          <Form.Control
-            name="userName"
-            type="text"
-            placeholder="username"
-            onChange={formik.handleChange}
-            value={formik.values.userName}
-            onBlur={formik.handleBlur}
-          />
-          {formik.touched.userName && formik.errors.userName ? (
-            <div className="error-message">{formik.errors.userName}</div>
-          ) : null}
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="email">
-          <Form.Control
-            name="email"
-            type="email"
-            placeholder="email address"
-            onChange={formik.handleChange}
-            value={formik.values.email}
-            onBlur={formik.handleBlur}
-          />
-          {formik.touched.email && formik.errors.email ? (
-            <div className="error-message">{formik.errors.email}</div>
-          ) : null}
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="password">
-          <Form.Control
-            name="password"
-            type="password"
-            placeholder="password"
-            onChange={formik.handleChange}
-            value={formik.values.password}
-            onBlur={formik.handleBlur}
-          />
-          {formik.touched.password && formik.errors.password ? (
-            <div className="error-message">{formik.errors.password}</div>
-          ) : null}
-        </Form.Group>
-        <div className="d-flex flex-column align-items-center">
-          <Button variant="dark" type="submit">
-            Sign up
-          </Button>
-        </div>
-      </Form>
-    </Container>
+    <Modal show={props.showModal} onHide={props.closeModal} centered>
+      <Modal.Header closeButton>
+        <Modal.Title>Sign Up </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <h1>Welcome to 4nez4Mzansi</h1>
+        <Form onSubmit={formik.handleSubmit}>
+          <Form.Group className="mb-3" controlId="firstName">
+            <Form.Control
+              name="firstName"
+              type="text"
+              placeholder="first Name"
+              onChange={formik.handleChange}
+              value={formik.values.firstName}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.firstName && formik.errors.firstName ? (
+              <div className="error-message">{formik.errors.firstName}</div>
+            ) : null}
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="surname">
+            <Form.Control
+              name="surname"
+              type="text"
+              placeholder="surname"
+              onChange={formik.handleChange}
+              value={formik.values.surname}
+            />
+            {formik.touched.surname && formik.errors.surname ? (
+              <div className="error-message">{formik.errors.surname}</div>
+            ) : null}
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="userName">
+            <Form.Control
+              name="userName"
+              type="text"
+              placeholder="username"
+              onChange={formik.handleChange}
+              value={formik.values.userName}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.userName && formik.errors.userName ? (
+              <div className="error-message">{formik.errors.userName}</div>
+            ) : null}
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="email">
+            <Form.Control
+              name="email"
+              type="email"
+              placeholder="email address"
+              onChange={formik.handleChange}
+              value={formik.values.email}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.email && formik.errors.email ? (
+              <div className="error-message">{formik.errors.email}</div>
+            ) : null}
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="password">
+            <Form.Control
+              name="password"
+              type="password"
+              placeholder="password"
+              onChange={formik.handleChange}
+              value={formik.values.password}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.password && formik.errors.password ? (
+              <div className="error-message">{formik.errors.password}</div>
+            ) : null}
+          </Form.Group>
+          <div className="d-flex flex-column align-items-center">
+            <Button variant="dark" type="submit">
+              Sign up
+            </Button>
+          </div>
+        </Form>
+      </Modal.Body>
+    </Modal>
   );
 }
 
