@@ -24,6 +24,13 @@ function App() {
           showModal={showModal}
         />
       )}
+      {showModal && (
+        <SignupPage
+          openModal={openModal}
+          closeModal={closeModal}
+          showModal={showModal}
+        />
+      )}
       <Routes>
         <Route path="/signup" element={<SignupPage />} />
 

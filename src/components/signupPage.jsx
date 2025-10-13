@@ -93,7 +93,6 @@ function SignupPage(props) {
         <Modal.Title>Sign Up </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h1>Welcome to 4nez4Mzansi</h1>
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group className="mb-3" controlId="firstName">
             <Form.Control

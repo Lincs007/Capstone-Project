@@ -30,9 +30,7 @@ function Header(props) {
               Products
             </Nav.Link>
             <Nav.Link onClick={props.openModal}>Login</Nav.Link>
-            <Nav.Link as={Link} to={"/signup"}>
-              Signup
-            </Nav.Link>
+            <Nav.Link onClick={props.openModal}>Signup</Nav.Link>
           </Nav>
 
           <Nav>
