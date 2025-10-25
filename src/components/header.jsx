@@ -1,9 +1,4 @@
 import { useSelector } from "react-redux";
-import LandingPage from "./landingPage";
-import ProductPage from "./productsPage";
-import ShoppingCart from "./shoppingCart";
-import LoginPage from "./loginPage";
-import SignupPage from "./signupPage";
 import { Navbar, Nav, Container, Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
