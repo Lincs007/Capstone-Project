@@ -24,8 +24,10 @@ function Header(props) {
             <Nav.Link as={Link} to={"/products"}>
               Products
             </Nav.Link>
-            <Nav.Link onClick={props.openModal}>Login</Nav.Link>
-            <Nav.Link onClick={props.openModal}>Signup</Nav.Link>
+            <Nav.Link onClick={() => props.openModal("login")}>Login</Nav.Link>
+            <Nav.Link onClick={() => props.openModal("signup")}>
+              Signup
+            </Nav.Link>
           </Nav>
 
           <Nav>

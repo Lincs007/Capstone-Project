@@ -4,31 +4,30 @@ import ProductPage from "./components/productsPage";
 import LoginPage from "./components/loginPage";
 import SignupPage from "./components/signupPage";
 import Header from "./components/header";
+import useModalHandler from "./components/modalHandler";
 import "./App.css";
 import "./customCss/landingPage.css";
 import "./customCss/form.css";
 import { Routes, Route } from "react-router-dom";
-import { useState } from "react";
 
 function App() {
-  const [showModal, setShowModal] = useState(false);
-  const openModal = () => setShowModal(true);
-  const closeModal = () => setShowModal(false);
+  const { activeModal, openModal, closeModal } = useModalHandler();
+
   return (
     <>
       <Header openModal={openModal} />
-      {showModal && (
+      {activeModal === "login" && (
         <LoginPage
           openModal={openModal}
           closeModal={closeModal}
-          showModal={showModal}
+          showModal={activeModal === "login"}
         />
       )}
-      {showModal && (
+      {activeModal === "signup" && (
         <SignupPage
           openModal={openModal}
           closeModal={closeModal}
-          showModal={showModal}
+          showModal={activeModal === "signup"}
         />
       )}
       <Routes>
