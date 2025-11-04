@@ -4,10 +4,12 @@ import { useState } from "react";
 import { Card, Col, Row, Form, Modal } from "react-bootstrap";
 import { chooseColor } from "../store/productsSlice";
 import { incrementQuantity } from "../store/shoppingCartSlice";
+import { useNavigate } from "react-router-dom";
 
 function LandingPage() {
   const products = useSelector((state) => state.products.products);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleColorChange = (product) =>
     dispatch(chooseColor({ id: product.id, color: product.selectedColor }));
   const [showModal, setShowModal] = useState(false);
@@ -20,7 +22,10 @@ function LandingPage() {
     setShowModal(false);
     setSelectedProduct(null);
   };
-  const handleClick = () => {};
+  const handleClick = () => {
+    console.log("Navigating to products page");
+    navigate("/products");
+  };
   return (
     <div className="main container py-5">
       <Row xs={1} sm={2} md={3} lg={5} className="g-4">
