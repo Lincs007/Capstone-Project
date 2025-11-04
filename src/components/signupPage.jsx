@@ -88,7 +88,12 @@ function SignupPage(props) {
   });
 
   return (
-    <Modal show={props.showModal} onHide={props.closeModal} centered>
+    <Modal
+      show={props.showModal}
+      onHide={props.closeModal}
+      centered
+      className="prompt-modal"
+    >
       <Modal.Header closeButton>
         <Modal.Title>Sign Up </Modal.Title>
       </Modal.Header>

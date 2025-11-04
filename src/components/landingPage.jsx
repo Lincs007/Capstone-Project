@@ -51,7 +51,12 @@ function LandingPage() {
                     <i className="bi bi-info-circle text-secondary"></i>
                   </Button>
                 </div>
-                <Modal show={showModal} onHide={closeModal} centered>
+                <Modal
+                  show={showModal}
+                  onHide={closeModal}
+                  centered
+                  className="info-modal"
+                >
                   <Modal.Header closeButton>
                     <Modal.Title>{selectedProduct?.title}</Modal.Title>
                   </Modal.Header>

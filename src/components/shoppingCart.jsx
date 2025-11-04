@@ -128,7 +128,12 @@ function ShoppingCart() {
                 </Button>
               </Col>
             </Row>
-            <Modal show={showModal} onHide={closeModal} centered>
+            <Modal
+              show={showModal}
+              onHide={closeModal}
+              centered
+              className="shipping-info-modal"
+            >
               <Modal.Header closeButton>
                 <Modal.Title>Shipping Information</Modal.Title>
               </Modal.Header>
