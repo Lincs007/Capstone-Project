@@ -6,11 +6,20 @@
 .modal-backdrop {
   background-color: transparent !important;
 }
-.modal-content {
+.info-modal .modal-content {
   background-color: rgba(0, 0, 0, 0.1);
   border: none;
   box-shadow: none;
   color: white;
+}
+.shipping-info-modal .modal-content {
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+.prompt-modal .modal-content {
+  background-color: #f0f0f0;
+  color: #000;
 }
 
 .form-label {
