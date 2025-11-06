@@ -1,12 +1,25 @@
-# React + Vite
+# 4nez4Mzansi – Mobile Phones E-commerce Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Author:** Lincoln Chaza  
+**Location:** Brooklyn, Cape Town, South Africa  
+**Date:** November 2025
 
-Currently, two official plugins are available:
+## Description
+4nez4Mzansi is a responsive single-page web application (SPA) built with React, Redux, and React-Bootstrap. It allows users to browse mobile phones, view specifications, select variants (displayed as text), and manage a shopping cart. The project demonstrates modern front-end development practices, state management, and responsive design.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+- Browse a catalog of mobile phones with specifications and prices
+- Text-based color variant selection for products
+- Add, remove, and update quantities in the shopping cart
+- Login and signup via modal pop-ups
+- Responsive design for mobile, tablet, and desktop screens
 
-## Expanding the ESLint configuration
+## Technologies Used
+- **Front-end:** React, React-Bootstrap, CSS  
+- **State Management:** Redux  
+- **Version Control:** Git & GitHub
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Installation / Setup Instructions
+1. Clone the repository:  
+   ```bash
+   git clone https://github.com/Lincs007/4nez4Mzansi.git
