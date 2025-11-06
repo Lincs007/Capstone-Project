@@ -18,7 +18,16 @@ function Header(props) {
       >
         <Container>
           <Navbar.Brand as={NavLink} to={"/"} className="navItem">
-            4nez4Mzansi
+            <img
+              src="/images/logo/logo.jpg"
+              alt="4nez4Mzansi"
+              style={{
+                width: "80px",
+                height: "60px",
+                marginRight: "10px",
+                borderRadius: "50%",
+              }}
+            />
           </Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link as={NavLink} to={"/products"} className="navItem">
