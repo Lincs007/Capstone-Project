@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { Navbar, Nav, Container, Badge } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Header(props) {
   const cartProducts = useSelector((state) => state.shoppingCart.shoppingCart);
@@ -17,11 +17,11 @@ function Header(props) {
         sticky="top"
       >
         <Container>
-          <Navbar.Brand as={Link} to={"/"}>
+          <Navbar.Brand as={NavLink} to={"/"} className="navItem">
             4nez4Mzansi
           </Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link as={Link} to={"/products"}>
+            <Nav.Link as={NavLink} to={"/products"} className="navItem">
               Products
             </Nav.Link>
             <Nav.Link onClick={() => props.openModal("login")}>Login</Nav.Link>
@@ -31,7 +31,7 @@ function Header(props) {
           </Nav>
 
           <Nav>
-            <Nav.Link as={Link} to={"/cart"}>
+            <Nav.Link as={NavLink} to={"/cart"} className="navItem">
               Cart{""}
               <Badge bg="secondary">{cartTotalItems}</Badge>{" "}
             </Nav.Link>
