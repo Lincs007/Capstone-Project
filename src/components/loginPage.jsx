@@ -41,6 +41,7 @@ function LoginPage(props) {
       );
       if (matchedUser && matchedUser.password === values.password) {
         console.log("Login successful", values);
+        props.closeModal();
         navigate("/");
       } else {
         console.log("Login failed", values);
