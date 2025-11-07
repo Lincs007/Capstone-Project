@@ -78,9 +78,12 @@ function SignupPage(props) {
       const userNameTest = savedUserName.some(
         (userName) => userName === values.userName
       );
-      if (!userNameTest && savedEmail.some((email) => email === values.email)) {
+      if (
+        !userNameTest &&
+        !savedEmail.some((email) => email === values.email)
+      ) {
         console.log("Signup successful", values);
-        navigate("/login");
+        props.openModal("login");
       } else {
         console.log("Signup failed", values);
       }
