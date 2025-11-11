@@ -1,22 +1,29 @@
 function Footer() {
+  // Get the current year dynamically
   const year = new Date().getFullYear();
 
   return (
+    // Main footer container
     <footer className="footer" aria-labelledby="footer-heading">
       <div className="footer-inner">
-        {/* Column 1 */}
+        {/* Column 1: Logo and Description */}
         <div className="footer-col">
+          {/* Store logo / name */}
           <div className="footer-logo">Online Store</div>
+
+          {/* Short description about the store */}
           <div className="footer-text">
             Curated products, fair prices, fast shipping. Built for a simple and
             delightful shopping experience.
           </div>
+
+          {/* Small copyright text with current year */}
           <div className="footer-small">
             © {year} Online Store. All rights reserved.
           </div>
         </div>
 
-        {/* Column 2 */}
+        {/* Column 2: Shop Links */}
         <div className="footer-col">
           <h4>Shop</h4>
           <nav aria-label="footer shop">
@@ -27,7 +34,7 @@ function Footer() {
           </nav>
         </div>
 
-        {/* Column 3 */}
+        {/* Column 3: Support Links */}
         <div className="footer-col">
           <h4>Support</h4>
           <nav aria-label="footer support">
@@ -38,15 +45,19 @@ function Footer() {
           </nav>
         </div>
 
-        {/* Column 4 */}
+        {/* Column 4: Contact Information */}
         <div className="footer-col">
           <h4>Contact</h4>
           <div className="footer-text">
+            {/* Contact email */}
             <div>support@4nez4Mzansi.com</div>
+            {/* Contact phone number */}
             <div>+27 (67) 027-2882</div>
+            {/* Working hours */}
             <div className="footer-small">Mon–Fri, 9am–6pm</div>
           </div>
 
+          {/* Social media links */}
           <div className="footer-social">
             <a
               href="https://facebook.com"
@@ -79,4 +90,5 @@ function Footer() {
   );
 }
 
+// Export the Footer component to be used in other parts of the app
 export default Footer;

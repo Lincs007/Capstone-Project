@@ -20,18 +20,18 @@ import {
 import { useNavigate } from "react-router-dom"; // programmatic navigation
 
 function ShoppingCart() {
-  // read cart products from redux store
+  // Get cart products from Redux store
   const cartProducts = useSelector((state) => state.shoppingCart.shoppingCart);
 
-  const dispatch = useDispatch(); // get dispatch function for actions
-  const navigate = useNavigate(); // get navigate function for routing
+  const dispatch = useDispatch(); // dispatch actions to Redux
+  const navigate = useNavigate(); // navigate programmatically
 
-  // local state for the shipping info modal visibility
+  // State for controlling the shipping info modal
   const [showModal, setShowModal] = useState(false);
-  const openModal = () => setShowModal(true); // show modal
-  const closeModal = () => setShowModal(false); // hide modal
+  const openModal = () => setShowModal(true); // open modal
+  const closeModal = () => setShowModal(false); // close modal
 
-  // calculate total price by summing each product's price * quantity
+  // Calculate total price of all items in cart
   const totalPrice = cartProducts.reduce(
     (total, product) =>
       total +
@@ -40,47 +40,43 @@ function ShoppingCart() {
     0
   );
 
-  // helper to format a number as South African Rand currency
+  // Helper to format a number as South African Rand
   const formatCurrency = (value) =>
     new Intl.NumberFormat("en-ZA", {
       style: "currency",
       currency: "ZAR",
     }).format(value);
 
-  console.log(formatCurrency(totalPrice)); // debug total price formatting
+  console.log(formatCurrency(totalPrice)); // debug total price
 
   return (
     <Container className="shoppingCart-container">
       {/* Page title */}
       <h2>Shopping Cart</h2>
 
-      {/* If cart is empty, show message and Shop Now button */}
+      {/* Show message if cart is empty */}
       {cartProducts.length === 0 ? (
         <>
-          {/* Inform user the cart is empty */}
           <p>Your cart is empty</p>
-
-          {/* navigate to products page when clicked */}
           <Button onClick={() => navigate("/products")} variant="dark">
             Shop Now
           </Button>
         </>
       ) : (
-        // When there are items in the cart, render them
+        // Render cart items if available
         <div>
           {cartProducts.map((product) => {
-            // parse price string to number (remove currency symbols)
+            // Convert price string to number
             const productPrice = parseFloat(
               product.price.replace(/[^\d.-]/g, "")
             );
-            // compute subtotal for current product
-            const subtotal = productPrice * Number(product.quantity);
+            const subtotal = productPrice * Number(product.quantity); // subtotal for this product
 
             return (
               <Card key={product.id} className=" h-100 shadow-sm">
                 <Row className="g-0 align-items-center">
                   <Col md={2}>
-                    {/* product image */}
+                    {/* Product image */}
                     <Card.Img
                       src={product.src}
                       srcSet={product.srcSet}
@@ -92,10 +88,10 @@ function ShoppingCart() {
 
                   <Col md={4}>
                     <Card.Body>
-                      {/* product title */}
+                      {/* Product title */}
                       <Card.Title>{product.title}</Card.Title>
+                      {/* Price, quantity, and subtotal */}
                       <Card.Text>
-                        {/* price, quantity and subtotal display */}
                         Price:{product.price} <br />
                         Quantity: {product.quantity} <br />
                         Subtotal: {formatCurrency(subtotal)}{" "}
@@ -104,7 +100,7 @@ function ShoppingCart() {
                   </Col>
 
                   <Col md={1} className="text-end p-3">
-                    {/* quantity controls and remove button */}
+                    {/* Quantity controls and remove button */}
                     <div className="d-flex justify-content-end align-items-center gap-2">
                       <Button
                         variant="outline-secondary"
@@ -115,7 +111,7 @@ function ShoppingCart() {
                         -
                       </Button>
 
-                      {/* current quantity */}
+                      {/* Current quantity */}
                       <span>{product.quantity}</span>
 
                       <Button
@@ -126,7 +122,7 @@ function ShoppingCart() {
                         +
                       </Button>
 
-                      {/* remove item from cart */}
+                      {/* Remove item from cart */}
                       <Button
                         variant="danger"
                         size="sm"
@@ -145,11 +141,11 @@ function ShoppingCart() {
           <hr />
           <h3> Total amount :{formatCurrency(totalPrice)} </h3>
 
-          {/* Actions area: shipping selection, info modal trigger, checkout */}
+          {/* Shipping and checkout section */}
           <div className="text-end mt-3">
             <Row>
               <Col>
-                {/* shipping method selector */}
+                {/* Shipping method selector */}
                 <Form.Select
                   aria-label="shipping-method"
                   className="shipping-method mb-3"
@@ -163,7 +159,7 @@ function ShoppingCart() {
               </Col>
 
               <Col>
-                {/* button that opens the shipping info modal */}
+                {/* Info button for shipping details modal */}
                 <Button
                   variant="info"
                   className="me-2"
@@ -198,14 +194,14 @@ function ShoppingCart() {
                 </p>
               </Modal.Body>
               <Modal.Footer>
-                {/* close modal button */}
+                {/* Close modal button */}
                 <Button variant="dark" onClick={closeModal}>
                   Close
                 </Button>
               </Modal.Footer>
             </Modal>
 
-            {/* proceed to checkout button */}
+            {/* Proceed to checkout button */}
             <Button variant="success" size="lg">
               Proceed to Checkout
             </Button>

@@ -11,8 +11,7 @@ const store = configureStore({
     userDetails: userDetailsReducer,
     auth: authReducer,
   },
-  //middleware: [],
-  devTools: process.env.NODE_ENV !== "production",
+  devTools: process.env.NODE_ENV !== "production", // Enable Redux DevTools only in dev
 });
 
 export default store;

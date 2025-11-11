@@ -1,8 +1,9 @@
+/* Container for forms (e.g., login/signup) */
 .form-container {
-  max-width: 50%;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+  max-width: 50%; /* Limit width to half of the viewport */
+  margin: auto; /* Center container horizontally */
+  padding: 20px; /* Space inside the container */
+  border: 1px solid #ddd; /* Light gray border */
+  border-radius: 8px; /* Rounded corners */
+  background-color: #f9f9f9; /* Light background color for contrast */
 }

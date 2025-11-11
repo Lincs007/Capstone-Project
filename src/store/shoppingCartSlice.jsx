@@ -8,6 +8,7 @@ const shoppingCartSlice = createSlice({
   name: "shoppingCart",
   initialState,
   reducers: {
+    // Add product to cart or increment quantity if it exists
     incrementQuantity: (state, action) => {
       const product = action.payload;
       const existingProduct = state.shoppingCart.find(
@@ -19,6 +20,8 @@ const shoppingCartSlice = createSlice({
         state.shoppingCart.push({ ...product, quantity: 1 });
       }
     },
+
+    // Decrease quantity or remove product if quantity reaches 0
     decrementQuantity: (state, action) => {
       const productId = action.payload;
       const existingProduct = state.shoppingCart.find(
@@ -28,12 +31,16 @@ const shoppingCartSlice = createSlice({
         if (existingProduct.quantity > 1) {
           existingProduct.quantity -= 1;
         } else {
-          return state.shoppingCart.filter(
+          // Instead of returning a new array (which does nothing here),
+          // update state.shoppingCart directly
+          state.shoppingCart = state.shoppingCart.filter(
             (product) => product.id !== productId
           );
         }
       }
     },
+
+    // Remove product from cart completely
     removeFromCart: (state, action) => {
       const productId = action.payload;
       state.shoppingCart = state.shoppingCart.filter(
@@ -42,6 +49,10 @@ const shoppingCartSlice = createSlice({
     },
   },
 });
+
+// Export actions
 export const { incrementQuantity, removeFromCart, decrementQuantity } =
   shoppingCartSlice.actions;
+
+// Export reducer
 export default shoppingCartSlice.reducer;

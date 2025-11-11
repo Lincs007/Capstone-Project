@@ -1,76 +1,105 @@
+/* Product description text inside modals */
 .product-description {
-  font-size: 0.9rem;
-  font-style: italic;
-  color: white;
+  font-size: 0.9rem; /* Slightly smaller text */
+  font-style: italic; /* Italic style for emphasis */
+  color: white; /* White text for contrast on dark background */
 }
+
+/* Make modal backdrop transparent */
 .modal-backdrop {
-  background-color: transparent !important;
+  background-color: transparent !important; /* Overrides default backdrop color */
 }
+
+/* Info modal styles */
 .info-modal .modal-content {
-  background-color: rgba(0, 0, 0, 0.1);
-  border: none;
-  box-shadow: none;
-  color: white;
+  background-color: rgba(0, 0, 0, 0.1); /* Semi-transparent dark background */
+  border: none; /* Remove border */
+  box-shadow: none; /* Remove shadow */
+  color: white; /* Text color */
 }
+
+/* Shipping info modal styles */
 .shipping-info-modal .modal-content {
-  background-color: #f0f0f0;
-  color: #000;
+  background-color: #f0f0f0; /* Light gray background */
+  color: #000; /* Black text */
 }
 
+/* Generic prompt modal styles (e.g., login/signup) */
 .prompt-modal .modal-content {
-  background-color: #f0f0f0;
-  color: #000;
+  background-color: #f0f0f0; /* Light gray background */
+  color: #000; /* Black text */
 }
 
+/* Form label styling */
 .form-label {
-  margin-top: 10px;
-  color: black;
+  margin-top: 10px; /* Space above label */
+  color: black; /* Label text color */
 }
+
+/* Select dropdown for product colors */
 .select-color {
-  font-size: 0.9rem;
-  margin-bottom: 10px;
-  color: #333;
+  font-size: 0.9rem; /* Slightly smaller text */
+  margin-bottom: 10px; /* Space below dropdown */
+  color: #333; /* Dark gray text */
 }
+
+/* Main container for pages */
 .main {
-  min-height: 100vh;
+  min-height: 100vh; /* Ensure full viewport height */
 }
+
+/* Product card layout */
 .product-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
+  display: flex; /* Flex layout */
+  flex-direction: column; /* Stack content vertically */
+  justify-content: space-between; /* Spread content evenly */
+  height: 100%; /* Full height of parent container */
 }
+
+/* Product image styling */
 .product-image {
-  object-fit: cover;
-  width: 100%;
-  height: 200px;
+  object-fit: cover; /* Crop image to fill container without distortion */
+  width: 100%; /* Full width */
+  height: 200px; /* Fixed height */
 }
+
+/* Wrapper for product images to center them */
 .image-wrapper {
   width: 100%;
-  height: 200px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 200px; /* Match image height */
+  overflow: hidden; /* Hide overflow */
+  display: flex; /* Flex layout */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
 }
+
+/* Landing page welcome text */
 .welcome {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 2.5rem; /* Large heading */
+  margin-bottom: 0.5rem; /* Space below heading */
 }
+
+/* Landing page description text */
 .landing-description {
-  font-size: 1.1rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.1rem; /* Slightly larger paragraph text */
+  margin-bottom: 1.5rem; /* Space below paragraph */
 }
+
+/* Generic button styling */
 .button {
-  border-radius: 25px;
-  padding: 10px 25px;
+  border-radius: 25px; /* Rounded pill-shaped button */
+  padding: 10px 25px; /* Vertical and horizontal padding */
 }
+
+/* Wrapper for information button in checkout/shipping section */
 .information-button-wrapper {
-  display: flex;
+  display: flex; /* Layout button horizontally if multiple buttons */
 }
+
+/* Active navigation item styling */
 .navItem.active {
-  background-color: gray;
-  color: white !important;
-  border-radius: 5px;
-  padding: 6px 12px;
+  background-color: gray; /* Gray background for active link */
+  color: white !important; /* Ensure text is white */
+  border-radius: 5px; /* Slightly rounded corners */
+  padding: 6px 12px; /* Space inside the nav item */
 }

@@ -1,18 +1,30 @@
+// Importing createSlice from Redux Toolkit to create a slice of state
 import { createSlice } from "@reduxjs/toolkit";
 
+// Initial state for the products slice
 const initialState = {
+  // Array of product objects containing all product details
   products: [
     {
+      // Unique identifier for the product
       id: 1,
+      // Product name/title
       title: "iPhone 16 Pro Max",
+      // Product description detailing specs and features
       description:
         "The iPhone 16 Pro Max is Apple's flagship 2024 model, designed for users demanding cutting-edge performance and professional photography. It features a 6.9-inch Super Retina XDR display with ProMotion technology for smooth 120Hz refresh rates, making it ideal for immersive viewing and seamless multitasking. Available from 256GB - 2TB storage, powered by the A18 Pro chip, and equipped with a triple-camera system including 48MP main, 48MP ultra-wide, and 12MP telephoto cameras.",
+      // Main image source path
       src: "/images/iPhone/iPhone_16_Pro_Black.webp",
+      // Responsive image sources for different resolutions
       srcSet:
         "/images/iPhone/iPhone_16_Pro_Black.webp 500w, /images/iPhone/iPhone_16_Pro_Black.webp 1000w, /images/iPhone/iPhone_16_Pro_Black.webp 1500w",
+      // Image display sizes for responsive design
       sizes: "(max-width: 600px) 100vw, (max-width:960px) 50vw, 33vw",
+      // Product price
       price: "R 29, 999.99",
+      // Array of available color options
       color: ["space gray", "rose gold", "jet black"],
+      // Default text for selected color
       selectedColor: "Choose Color",
     },
     {
@@ -36,6 +48,7 @@ const initialState = {
       src: "/images/huawei/Huawei-Pura-80-Pro-in-Black.webp",
       srcSet:
         "/images/huawei/Huawei-Pura-80-Pro-in-Black.webp 500w, /images/huawei/Huawei-Pura-80-Pro-in-Black.webp 1000w, /images/huawei/Huawei-Pura-80-Pro-in-Black.webp 1500w",
+      // Typo in original key 'sizez' instead of 'sizes'
       sizez: "(max-width: 600px) 100vw, (max-width:960px) 50vw, 33vw",
       price: "R 36,999.00",
       color: ["graphite black", " silver frost", "ruby purple"],
@@ -64,8 +77,8 @@ const initialState = {
         "/images/iPhone/iphone_15_pro_max.webp 500w, /images/iPhone/iphone_15_pro_max.webp 1000w, /images/iPhone/iphone_15_pro_max.webp 1500w",
       sizes: "(max-width: 600px) 100vw, (max-width:960px) 50vw, 33vw",
       price: "R 25,459.99",
-      color: ["blue", "red", "rose gold"], // Available colors for the product
-      selectedColor: "Choose Color", // Default selected color text
+      color: ["blue", "red", "rose gold"],
+      selectedColor: "Choose Color",
     },
     {
       id: 6,
@@ -200,13 +213,21 @@ const initialState = {
   ],
 };
 
+// Creating a Redux slice for products
 const productsSlice = createSlice({
+  // Name of the slice
   name: "products",
+  // Initial state
   initialState,
+  // Reducers for handling actions
   reducers: {
+    // Action to set the selected color for a product
     chooseColor: (state, action) => {
+      // Destructure product ID and selected color from payload
       const { id, color } = action.payload;
+      // Find the product by its ID
       const product = state.products.find((product) => product.id === id);
+      // Update selectedColor if product is found
       if (product) {
         product.selectedColor = color;
       }
@@ -214,6 +235,8 @@ const productsSlice = createSlice({
   },
 });
 
-//export const selectAllProducts = (state) => state.products.products;
+// Exporting the action to be dispatched from components
 export const { chooseColor } = productsSlice.actions;
+
+// Exporting the reducer to configure store
 export default productsSlice.reducer;
