@@ -2,10 +2,13 @@ import { useFormik } from "formik";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../store/authSlice";
 
 function LoginPage(props) {
   const savedUser = useSelector((state) => state.userDetails.userDetails);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   console.log("saved user details from redux store:", savedUser);
   const validate = (values) => {
     const errors = {};
@@ -40,6 +43,7 @@ function LoginPage(props) {
         (user) => user.userName === values.userName
       );
       if (matchedUser && matchedUser.password === values.password) {
+        dispatch(loginSuccess(matchedUser));
         console.log("Login successful", values);
         props.closeModal();
         navigate("/");
