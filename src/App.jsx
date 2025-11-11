@@ -4,10 +4,12 @@ import ProductPage from "./components/productsPage";
 import LoginPage from "./components/loginPage";
 import SignupPage from "./components/signupPage";
 import Header from "./components/header";
+import Footer from "./components/footer";
 import useModalHandler from "./components/modalHandler";
 import "./App.css";
 import "./customCss/landingPage.css";
 import "./customCss/form.css";
+import "./customCss/footer.css";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -37,6 +39,7 @@ function App() {
         <Route path="/products" element={<ProductPage />} />
         <Route path="/cart" element={<ShoppingCart />} />
       </Routes>
+      <Footer />
     </>
   );
 }

@@ -6,23 +6,32 @@ import {
   Button,
   Form,
   Modal,
-} from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+} from "react-bootstrap"; // UI components from react-bootstrap
+
+import { useSelector, useDispatch } from "react-redux"; // hooks to read state and dispatch actions
+import { useState } from "react"; // local state hook
+
 import {
   removeFromCart,
   incrementQuantity,
   decrementQuantity,
-} from "../store/shoppingCartSlice";
-import { useNavigate } from "react-router-dom";
+} from "../store/shoppingCartSlice"; // cart actions
+
+import { useNavigate } from "react-router-dom"; // programmatic navigation
 
 function ShoppingCart() {
+  // read cart products from redux store
   const cartProducts = useSelector((state) => state.shoppingCart.shoppingCart);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+
+  const dispatch = useDispatch(); // get dispatch function for actions
+  const navigate = useNavigate(); // get navigate function for routing
+
+  // local state for the shipping info modal visibility
   const [showModal, setShowModal] = useState(false);
-  const openModal = () => setShowModal(true);
-  const closeModal = () => setShowModal(false);
+  const openModal = () => setShowModal(true); // show modal
+  const closeModal = () => setShowModal(false); // hide modal
+
+  // calculate total price by summing each product's price * quantity
   const totalPrice = cartProducts.reduce(
     (total, product) =>
       total +
@@ -30,33 +39,48 @@ function ShoppingCart() {
         Number(product.quantity),
     0
   );
+
+  // helper to format a number as South African Rand currency
   const formatCurrency = (value) =>
     new Intl.NumberFormat("en-ZA", {
       style: "currency",
       currency: "ZAR",
     }).format(value);
-  console.log(formatCurrency(totalPrice));
+
+  console.log(formatCurrency(totalPrice)); // debug total price formatting
+
   return (
     <Container className="shoppingCart-container">
+      {/* Page title */}
       <h2>Shopping Cart</h2>
+
+      {/* If cart is empty, show message and Shop Now button */}
       {cartProducts.length === 0 ? (
         <>
+          {/* Inform user the cart is empty */}
           <p>Your cart is empty</p>
+
+          {/* navigate to products page when clicked */}
           <Button onClick={() => navigate("/products")} variant="dark">
             Shop Now
           </Button>
         </>
       ) : (
+        // When there are items in the cart, render them
         <div>
           {cartProducts.map((product) => {
+            // parse price string to number (remove currency symbols)
             const productPrice = parseFloat(
               product.price.replace(/[^\d.-]/g, "")
             );
+            // compute subtotal for current product
             const subtotal = productPrice * Number(product.quantity);
+
             return (
               <Card key={product.id} className=" h-100 shadow-sm">
                 <Row className="g-0 align-items-center">
                   <Col md={2}>
+                    {/* product image */}
                     <Card.Img
                       src={product.src}
                       srcSet={product.srcSet}
@@ -68,15 +92,19 @@ function ShoppingCart() {
 
                   <Col md={4}>
                     <Card.Body>
+                      {/* product title */}
                       <Card.Title>{product.title}</Card.Title>
                       <Card.Text>
+                        {/* price, quantity and subtotal display */}
                         Price:{product.price} <br />
                         Quantity: {product.quantity} <br />
                         Subtotal: {formatCurrency(subtotal)}{" "}
                       </Card.Text>
                     </Card.Body>
                   </Col>
+
                   <Col md={1} className="text-end p-3">
+                    {/* quantity controls and remove button */}
                     <div className="d-flex justify-content-end align-items-center gap-2">
                       <Button
                         variant="outline-secondary"
@@ -86,7 +114,10 @@ function ShoppingCart() {
                       >
                         -
                       </Button>
+
+                      {/* current quantity */}
                       <span>{product.quantity}</span>
+
                       <Button
                         variant="outline-secondary"
                         size="sm"
@@ -94,6 +125,8 @@ function ShoppingCart() {
                       >
                         +
                       </Button>
+
+                      {/* remove item from cart */}
                       <Button
                         variant="danger"
                         size="sm"
@@ -107,11 +140,16 @@ function ShoppingCart() {
               </Card>
             );
           })}
+
+          {/* Separator and total amount */}
           <hr />
           <h3> Total amount :{formatCurrency(totalPrice)} </h3>
+
+          {/* Actions area: shipping selection, info modal trigger, checkout */}
           <div className="text-end mt-3">
             <Row>
               <Col>
+                {/* shipping method selector */}
                 <Form.Select
                   aria-label="shipping-method"
                   className="shipping-method mb-3"
@@ -123,7 +161,9 @@ function ShoppingCart() {
                   <option value="pickup">In-Store Pickup</option>
                 </Form.Select>
               </Col>
+
               <Col>
+                {/* button that opens the shipping info modal */}
                 <Button
                   variant="info"
                   className="me-2"
@@ -135,6 +175,8 @@ function ShoppingCart() {
                 </Button>
               </Col>
             </Row>
+
+            {/* Shipping information modal */}
             <Modal
               show={showModal}
               onHide={closeModal}
@@ -156,11 +198,14 @@ function ShoppingCart() {
                 </p>
               </Modal.Body>
               <Modal.Footer>
+                {/* close modal button */}
                 <Button variant="dark" onClick={closeModal}>
                   Close
                 </Button>
               </Modal.Footer>
             </Modal>
+
+            {/* proceed to checkout button */}
             <Button variant="success" size="lg">
               Proceed to Checkout
             </Button>
