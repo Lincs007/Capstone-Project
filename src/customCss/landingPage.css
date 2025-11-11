@@ -103,3 +103,45 @@
   border-radius: 5px; /* Slightly rounded corners */
   padding: 6px 12px; /* Space inside the nav item */
 }
+
+/* Make the cart container full height */
+.shoppingCart-container {
+  min-height: calc(100vh - 120px); /* subtract header+footer height */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* keeps content at top */
+  padding: 2rem;
+  background-color: #f8f9fa; /* light background optional */
+}
+
+/* If cart is empty, center the message */
+.shoppingCart-container p {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #555;
+}
+
+/* Make cards stretch full width */
+.shoppingCart-container .card {
+  margin-bottom: 1rem;
+}
+.shoppingCart-container button {
+  width: auto; /* prevents stretching */
+  max-width: 200px; /* optional: limits width for large screens */
+}
+.empty-cart-container {
+  display: flex; /* enable flexbox */
+  flex-direction: column; /* stack text and button vertically */
+  align-items: center; /* center horizontally */
+  justify-content: center; /* center vertically if needed */
+  height: 70vh; /* optional: gives space for centering vertically */
+  text-align: center; /* center text */
+}
+
+.empty-cart-container button {
+  width: auto; /* prevent stretching */
+  margin-top: 1rem; /* spacing between text and button */
+}

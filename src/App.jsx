@@ -22,39 +22,39 @@ function App() {
   const { activeModal, openModal, closeModal } = useModalHandler();
 
   return (
-    <>
+    <div className="app-container">
       {/* Header component with modal open function */}
       <Header openModal={openModal} />
+      <div className="main-content">
+        {/* Conditional rendering for Login modal */}
+        {activeModal === "login" && (
+          <LoginPage
+            openModal={openModal}
+            closeModal={closeModal}
+            showModal={activeModal === "login"} // Pass showModal prop
+          />
+        )}
 
-      {/* Conditional rendering for Login modal */}
-      {activeModal === "login" && (
-        <LoginPage
-          openModal={openModal}
-          closeModal={closeModal}
-          showModal={activeModal === "login"} // Pass showModal prop
-        />
-      )}
+        {/* Conditional rendering for Signup modal */}
+        {activeModal === "signup" && (
+          <SignupPage
+            openModal={openModal}
+            closeModal={closeModal}
+            showModal={activeModal === "signup"} // Pass showModal prop
+          />
+        )}
 
-      {/* Conditional rendering for Signup modal */}
-      {activeModal === "signup" && (
-        <SignupPage
-          openModal={openModal}
-          closeModal={closeModal}
-          showModal={activeModal === "signup"} // Pass showModal prop
-        />
-      )}
-
-      {/* Routes for page navigation */}
-      <Routes>
-        <Route path="/signup" element={<SignupPage />} />
-        <Route exact path="/" element={<LandingPage />} />
-        <Route path="/products" element={<ProductPage />} />
-        <Route path="/cart" element={<ShoppingCart />} />
-      </Routes>
-
+        {/* Routes for page navigation */}
+        <Routes>
+          <Route path="/signup" element={<SignupPage />} />
+          <Route exact path="/" element={<LandingPage />} />
+          <Route path="/products" element={<ProductPage />} />
+          <Route path="/cart" element={<ShoppingCart />} />
+        </Routes>
+      </div>
       {/* Footer component */}
       <Footer />
-    </>
+    </div>
   );
 }
 

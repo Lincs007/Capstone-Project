@@ -40,3 +40,13 @@
 .read-the-docs {
   color: #888;
 }
+/* App.css or main layout CSS */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Full viewport height */
+}
+
+.main-content {
+  flex: 1; /* Take all remaining space between header and footer */
+}

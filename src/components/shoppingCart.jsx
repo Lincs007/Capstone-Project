@@ -50,18 +50,18 @@ function ShoppingCart() {
   console.log(formatCurrency(totalPrice)); // debug total price
 
   return (
-    <Container className="shoppingCart-container">
+    <Container className="shoppingCart-container fluid">
       {/* Page title */}
       <h2>Shopping Cart</h2>
 
       {/* Show message if cart is empty */}
       {cartProducts.length === 0 ? (
-        <>
+        <div className="empty-cart-container">
           <p>Your cart is empty</p>
           <Button onClick={() => navigate("/products")} variant="dark">
             Shop Now
           </Button>
-        </>
+        </div>
       ) : (
         // Render cart items if available
         <div>
