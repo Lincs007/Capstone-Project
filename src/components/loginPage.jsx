@@ -1,8 +1,7 @@
 import { useFormik } from "formik";
 import { Button, Form, Modal } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { loginSuccess } from "../store/authSlice";
 
 function LoginPage(props) {

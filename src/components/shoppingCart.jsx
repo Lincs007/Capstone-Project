@@ -14,10 +14,12 @@ import {
   incrementQuantity,
   decrementQuantity,
 } from "../store/shoppingCartSlice";
+import { useNavigate } from "react-router-dom";
 
 function ShoppingCart() {
   const cartProducts = useSelector((state) => state.shoppingCart.shoppingCart);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
@@ -38,7 +40,12 @@ function ShoppingCart() {
     <Container className="shoppingCart-container">
       <h2>Shopping Cart</h2>
       {cartProducts.length === 0 ? (
-        <p>Your cart is empty</p>
+        <>
+          <p>Your cart is empty</p>
+          <Button onClick={() => navigate("/products")} variant="dark">
+            Shop Now
+          </Button>
+        </>
       ) : (
         <div>
           {cartProducts.map((product) => {
